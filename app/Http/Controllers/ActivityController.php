@@ -17,9 +17,8 @@ class ActivityController extends Controller
     public function index(LogRequest $request)
     {
         $data = $request->json()->all();
-        $this->id = $data['id'];
-
         try {
+            $this->id = $data['id'];
             $method = $data['method'];
             if ($method === 'get') {
                 return response()->json($this->getActions($request));
