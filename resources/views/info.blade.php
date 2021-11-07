@@ -10,7 +10,6 @@
   <h4>API для проекта `activity` на основе JSON-RPC 2.0</h4>
 
   <p><a href="https://www.jsonrpc.org/specification">Спецификация</a></p>
-  <p><a href="/api/activity">Точка входа</a></p>
 
 </body>
 </html>

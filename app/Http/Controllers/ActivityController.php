@@ -16,13 +16,15 @@ class ActivityController extends Controller
 
     public function index(LogRequest $request)
     {
-        $this->id = $request->get('id');
+        $data = $request->json()->all();
+        $this->id = $data['id'];
+
         try {
-            $method = $request->get('method');
+            $method = $data['method'];
             if ($method === 'get') {
-                return response()->json($this->get($request));
-            } else if ($method === 'post') {
-                return response()->json($this->post($request));
+                return response()->json($this->getActions($request));
+            } else if ($method === 'save') {
+                return response()->json($this->saveAction($request));
             }
         } catch (\Throwable $e) {
             return response()->json($this->createJsonResponseError(JsonRpc20Config::REQUEST_ERROR, $e->getMessage()));
@@ -30,11 +32,11 @@ class ActivityController extends Controller
         return response()->json($this->createJsonResponseError(JsonRpc20Config::REQUEST_ERROR, 'Undefined `method`'));
     }
 
-    private function get(LogRequest $request)
+    private function getActions(LogRequest $request)
     {
-        $this->id = $request->get('id');
+        $data = $request->json()->all();
         try {
-            $params = $request->get('params');
+            $params = $data['params'];
             $page = $params['page'] ?? 1;
             $limit = $params['limit'] ?? self::DEFAULT_LIMIT;
             $logs = Log::getCollection($page === 0 ? 1 : $page, $limit);
@@ -54,9 +56,8 @@ class ActivityController extends Controller
         return $this->createJsonResponseSuccess(['page' => $page, 'limit' => $limit, 'data' => $result]);
     }
 
-    private function post(LogRequest $request)
+    private function saveAction(LogRequest $request)
     {
-        $this->id = $request->get('id');
         try {
             Log::setAppeal((new ActivityData())
                 ->setUrl($request->getUrl())
