@@ -10,6 +10,14 @@ PHP version >= 7.3
 $ php artisan migrate:install
 $ php artisan migrate
 ```
+
+
+Пробный запуск (из папки ``public``): 
+
+```bash
+$ php -S 127.0.0.1:8000
+```
+
 ----------------
 
 Foma Tuturov
