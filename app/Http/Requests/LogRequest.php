@@ -30,18 +30,6 @@ class LogRequest extends FormRequest
     public function rules(Request $request) {
         return [];
     }
-
-    public function getUrl(): string {
-        return $this->get('url');
-    }
-
-    /**
-     * @return DateTimeInterface
-     * @throws \Exception
-     */
-    public function getVisitDate(): DateTimeInterface {
-        return new DateTime($this->get('visit_at'));
-    }
 }
 
 

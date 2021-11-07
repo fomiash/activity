@@ -57,10 +57,12 @@ class ActivityController extends Controller
 
     private function saveAction(LogRequest $request)
     {
+        $data = $request->json()->all();
         try {
+            $params = $data['params'];
             Log::setAppeal((new ActivityData())
-                ->setUrl($request->getUrl())
-                ->setLastVisitAt($request->getVisitDate()));
+                ->setUrl($params['url'])
+                ->setLastVisitAt(new \DateTime($params['visit_at'])));
         } catch (\Throwable $e) {
             return $this->createJsonResponseError(JsonRpc20Config::SERVER_ERROR, $e->getMessage());
         }
