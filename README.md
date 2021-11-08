@@ -4,6 +4,11 @@ PHP version >= 7.3
 
 Установка:
 
+
+```bash
+$ composer composer install --no-scripts
+```
+
 1) Настроить подключение к базе данных в ```.env```
 2) Выполнить миграции:
 ```bash
