@@ -6,7 +6,7 @@ PHP version >= 7.3
 
 
 ```bash
-$ composer composer install --no-scripts
+$ composer install --no-scripts
 ```
 
 1) Настроить подключение к базе данных в ```.env```
